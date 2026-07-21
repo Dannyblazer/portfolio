@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nnaji Daniel — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#f5f2eb;
+  --bg-warm:#ebe7de;
+  --text:#1c1917;
+  --text-soft:#57534e;
+  --text-faint:#a8a29e;
+  --accent:#7c2d12;
+  --accent-glow:rgba(124,45,18,0.08);
+  --border:#d6d3cd;
+  --border-dark:#1c1917;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Playfair Display',Georgia,serif;
+}
+
+.dark{
+  --bg:#0c0a09;
+  --bg-warm:#141210;
+  --text:#e7e5e4;
+  --text-soft:#a8a29e;
+  --text-faint:#57534e;
+  --accent:#d4a574;
+  --accent-glow:rgba(212,165,116,0.08);
+  --border:#292524;
+  --border-dark:#e7e5e4;
+}
+
+body{background:var(--bg);transition:background 0.5s ease,color 0.5s ease;color:var(--text);font-family:var(--serif)}
+
+/* Toggle */
+.mode-toggle{
+  position:fixed;
+  top:28px;
+  right:32px;
+  z-index:100;
+  background:transparent;
+  border:none;
+  font-family:var(--mono);
+  font-size:0.7rem;
+  color:var(--text-faint);
+  cursor:pointer;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  transition:color 0.3s;
+  padding:4px 0;
+  border-bottom:1px solid var(--border);
+}
+.mode-toggle:hover{color:var(--accent);border-color:var(--accent)}
+
+/* Page */
+.page{
+  max-width:780px;
+  margin:0 auto;
+  padding:0 32px;
+}
+
+/* Masthead */
+.masthead{
+  padding:100px 0 48px;
+  position:relative;
+}
+.masthead::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(90deg,var(--border) 0%,var(--border) 70%,transparent 100%);
+}
+.name{
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,7vw,4.5rem);
+  font-weight:700;
+  letter-spacing:-0.03em;
+  line-height:1.05;
+  color:var(--text);
+  margin-bottom:8px;
+}
+.name .accent{color:var(--accent)}
+.subtitle{
+  font-family:var(--mono);
+  font-size:0.8rem;
+  color:var(--text-faint);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+
+/* Intro block */
+.intro{
+  padding:48px 0 56px;
+  max-width:560px;
+}
+.intro p{
+  font-family:var(--serif);
+  font-size:1.25rem;
+  line-height:1.6;
+  color:var(--text-soft);
+  font-style:italic;
+  margin-bottom:20px;
+}
+.intro .sig{
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--text-faint);
+  letter-spacing:0.05em;
+}
+
+/* Section */
+.section{
+  padding:0 0 64px;
+}
+.section-header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:32px;
+  padding-top:8px;
+}
+.section-num{
+  font-family:var(--mono);
+  font-size:0.65rem;
+  color:var(--text-faint);
+  letter-spacing:0.15em;
+}
+.section-title{
+  font-family:var(--serif);
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--text);
+  font-style:italic;
+}
+.section-line{
+  flex:1;
+  height:1px;
+  background:var(--border);
+  position:relative;
+  top:2px;
+}
+
+/* Index entries */
+.index-list{
+  list-style:none;
+}
+.index-item{
+  border-top:1px solid var(--border);
+  padding:28px 0;
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:24px;
+  transition:all 0.3s ease;
+  position:relative;
+}
+.index-item::before{
+  content:'';
+  position:absolute;
+  left:-16px;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:var(--accent);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.index-item:hover::before{opacity:1}
+.index-item:hover{
+  background:var(--accent-glow);
+  padding-left:8px;
+  padding-right:8px;
+  margin-left:-8px;
+  margin-right:-8px;
+  border-radius:4px;
+}
+.item-num{
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--text-faint);
+  padding-top:4px;
+}
+.item-body{min-width:0}
+.item-title-row{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+.item-title{
+  font-family:var(--serif);
+  font-size:1.3rem;
+  font-weight:600;
+  color:var(--text);
+  text-decoration:none;
+  transition:color 0.2s;
+}
+.item-title:hover{color:var(--accent)}
+.item-stars{
+  font-family:var(--mono);
+  font-size:0.7rem;
+  color:var(--text-faint);
+}
+.item-desc{
+  font-size:0.95rem;
+  line-height:1.65;
+  color:var(--text-soft);
+  margin-bottom:14px;
+}
+.item-meta{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.meta-field{
+  font-family:var(--mono);
+  font-size:0.7rem;
+  color:var(--text-faint);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+}
+.meta-field span{
+  color:var(--text-soft);
+  text-transform:none;
+  margin-left:6px;
+}
+
+/* Contact */
+.contact-block{
+  padding:24px 0 80px;
+}
+.contact-row{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+  transition:all 0.2s;
+}
+.contact-row:hover{padding-left:8px}
+.contact-row:hover .contact-label{color:var(--accent)}
+.contact-label{
+  font-family:var(--mono);
+  font-size:0.7rem;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--text-faint);
+  min-width:80px;
+  transition:color 0.2s;
+}
+.contact-value{
+  font-family:var(--mono);
+  font-size:0.85rem;
+  color:var(--text);
+  text-decoration:none;
+  transition:color 0.2s;
+}
+.contact-value:hover{color:var(--accent)}
+
+/* Footer */
+.footer{
+  padding:32px 0 60px;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.footer-left{
+  font-family:var(--mono);
+  font-size:0.65rem;
+  color:var(--text-faint);
+  letter-spacing:0.05em;
+}
+.footer-right{
+  font-family:var(--mono);
+  font-size:0.65rem;
+  color:var(--text-faint);
+}
+
+/* Responsive */
+@media(max-width:600px){
+  .index-item{grid-template-columns:36px 1fr;gap:16px}
+  .page{padding:0 20px}
+  .mode-toggle{top:16px;right:20px}
+}
+</style>
+</head>
+<body>
+
+<button class="mode-toggle" id="modeBtn" onclick="toggleMode()">Light / Dark</button>
+
+<div class="page">
+  <header class="masthead">
+    <h1 class="name">Nnaji<br><span class="accent">Daniel</span></h1>
+    <p class="subtitle">Software Engineer — Systems & Backend</p>
+  </header>
+
+  <div class="intro">
+    <p>I build systems that move money, compile code, and play chess on the blockchain. Currently exploring the intersection of payment infrastructure and distributed systems.</p>
+    <p class="sig">Based somewhere with reliable internet.</p>
+  </div>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Selected Work</span>
+      <div class="section-line"></div>
+    </div>
+    <ul class="index-list">
+      <li class="index-item">
+        <span class="item-num">001</span>
+        <div class="item-body">
+          <div class="item-title-row">
+            <a href="https://github.com/Dannyblazer/loom" class="item-title">Loom</a>
+            <span class="item-stars">★ 1</span>
+          </div>
+          <p class="item-desc">Multi-provider payment orchestration for Go. One interface, several African rails, automatic failover.</p>
+          <div class="item-meta">
+            <span class="meta-field">Lang<span>Go</span></span>
+            <span class="meta-field">Domain<span>Payments</span></span>
+            <span class="meta-field">Type<span>Orchestration</span></span>
+          </div>
+        </div>
+      </li>
+      <li class="index-item">
+        <span class="item-num">002</span>
+        <div class="item-body">
+          <div class="item-title-row">
+            <a href="https://github.com/Dannyblazer/hotreloader" class="item-title">HotReloader</a>
+            <span class="item-stars">★ 2</span>
+          </div>
+          <p class="item-desc">Intelligent Go dev tool. Analyzes file changes, caches unchanged modules aggressively, reports per-module rebuild times.</p>
+          <div class="item-meta">
+            <span class="meta-field">Lang<span>Go</span></span>
+            <span class="meta-field">Domain<span>DevTools</span></span>
+            <span class="meta-field">Type<span>CLI</span></span>
+          </div>
+        </div>
+      </li>
+      <li class="index-item">
+        <span class="item-num">003</span>
+        <div class="item-body">
+          <div class="item-title-row">
+            <a href="https://github.com/Dannyblazer/solana-chess" class="item-title">Solana-Chess</a>
+            <span class="item-stars">★ 2</span>
+          </div>
+          <p class="item-desc">On-chain chess engine built with Anchor on Solana. Every move is a transaction.</p>
+          <div class="item-meta">
+            <span class="meta-field">Lang<span>Rust</span></span>
+            <span class="meta-field">Domain<span>Web3</span></span>
+            <span class="meta-field">Type<span>Game Engine</span></span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Correspondence</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-block">
+      <div class="contact-row">
+        <span class="contact-label">Email</span>
+        <a href="mailto:nnajidanny004@gmail.com" class="contact-value">nnajidanny004@gmail.com</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">GitHub</span>
+        <a href="https://github.com/Dannyblazer" class="contact-value">github.com/Dannyblazer</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">X / Twitter</span>
+        <a href="https://x.com/blazetrane" class="contact-value">x.com/blazetrane</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/nnaji-daniel-642673187" class="contact-value">linkedin.com/in/nnaji-daniel</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-left">Last updated July 2026</span>
+    <span class="footer-right">dannyblazer.dev</span>
+  </footer>
+</div>
+
+<script>
+function toggleMode(){
+  const root = document.documentElement;
+  root.classList.toggle('dark');
+  localStorage.setItem('db-mode', root.classList.contains('dark') ? 'dark' : 'light');
+}
+const saved = localStorage.getItem('db-mode');
+if(saved === 'dark') document.documentElement.classList.add('dark');
+</script>
+
+</body>
+</html>
