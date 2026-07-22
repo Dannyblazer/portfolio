@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nnaji Daniel — Software Engineer</title>
+<!-- High-res PNG for browsers -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+<!-- Apple iOS home screen icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -292,6 +297,7 @@ body{background:var(--bg);transition:background 0.5s ease,color 0.5s ease;color:
   .mode-toggle{top:16px;right:20px}
 }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -402,7 +408,7 @@ function toggleMode(){
   localStorage.setItem('db-mode', root.classList.contains('dark') ? 'dark' : 'light');
 }
 const saved = localStorage.getItem('db-mode');
-if(saved === 'dark') document.documentElement.classList.add('dark');
+if(saved !== 'light') document.documentElement.classList.add('dark');
 </script>
 
 </body>
